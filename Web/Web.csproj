@@ -1,0 +1,266 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+      <CopyRefAssembliesToPublishDirectory>true</CopyRefAssembliesToPublishDirectory>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Content Include="..\.dockerignore">
+        <Link>.dockerignore</Link>
+      </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Data\" />
+      <Folder Include="Infrastructure\EfCore\" />
+      <Folder Include="Services\" />
+      <Folder Include="Utils\Helpers\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="BoltBit.Core" Version="1.0.0" />
+      <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.17" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.8" />
+      <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\Apps\Access\Permission.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Access\Roles.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Calendar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Chat.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Email.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Invoice\Add.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Invoice\Edit.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Invoice\List.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Invoice\Preview.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Invoice\Print.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Kanban.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\List.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\View\Account.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\View\Billing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\View\Connections.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\View\Notifications.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Apps\Users\View\Security.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\ForgotPassword\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\ForgotPassword\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Login\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Login\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Register\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Register\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\Register\MultiSteps.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\ResetPassword\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\ResetPassword\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\TwoSteps\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\TwoSteps\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\VerifyEmail\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Auth\VerifyEmail\Cover.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Cards\Actions.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Cards\Advance.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Cards\Analytics.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Cards\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Cards\Statistics.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Charts\Apex.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Charts\Chartjs.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Dashboards\Analytics.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Dashboards\CRM.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Dashboards\Ecommerce.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Avatar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\BlockUi.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\DragDrop.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\MediaPlayer.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Misc.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\PerfectScrollbar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\StarRatings.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\SweetAlert2.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\TextDivider.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Timeline\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Timeline\FullScreen.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Tour.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ExtendedUi\Treeview.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormLayouts\Horizontal.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormLayouts\Sticky.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormLayouts\Vertical.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\BasicInputs.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\CustomOptions.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Editors.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Extras.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\FileUpload.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\InputGroups.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Pickers.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Selects.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Sliders.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Forms\Switches.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormValidation\Validation.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormWizard\Icons.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\FormWizard\Numbered.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Icons\FontAwesome.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Icons\Tabler.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\Blank.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\CollapsedMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\Container.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\ContentNavbar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\ContentNavbarWithSidebar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\Fluid.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\HorizontalMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\VerticalMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\WithoutMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\LayoutExamples\WithoutNavbar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\Footer\_Footer.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\Menu\_HorizontalMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\Menu\_VerticalMenu.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\Navbar\_Navbar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\Navbar\_NavbarPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\_Scripts.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\_ScriptsIncludes.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\_Styles.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\Sections\_Variables.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\_BlankLayout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\_CommonMasterLayout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\_ContentNavbarLayout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Layouts\_HorizontalLayout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Maps\Leaflet.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Modals\Examples.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\AccountSettings\Account.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\AccountSettings\Billing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\AccountSettings\Connections.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\AccountSettings\Notifications.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\AccountSettings\Security.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\FAQ.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\HelpCenter\Article.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\HelpCenter\Categories.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\HelpCenter\Landing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Misc\ComingSoon.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Misc\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Misc\NotAuthorized.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Misc\UnderMaintenance.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Pricing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Profile\Connections.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Profile\Projects.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Profile\Teams.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Pages\Profile\User.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tables\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tables\DataTables\Advanced.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tables\DataTables\Basic.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Tables\DataTables\Extensions.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Accordion.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Alerts.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Badges.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Buttons.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Carousel.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Collapse.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Dropdowns.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Footer.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\ListGroups.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Modals.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Navbar.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Offcanvas.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\PaginationBreadcrumbs.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Progress.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Spinners.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\TabsPills.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Toasts.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\TooltipsPopovers.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Ui\Typography.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Wizards\Checkout.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Wizards\CreateDeal.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\Wizards\PropertyListing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Macros.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalAddNewAddress.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalAddNewCc.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalAddPermission.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalAddRole.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalCreateApp.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalEditCc.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalEditPermission.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalEditUser.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalEnableOtp.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalPricing.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalReferEarn.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalShareProject.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalTwoFactorAuth.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Modals\ModalUpgradePlan.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Offcanvas\OffcanvasAddPayment.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\_Partials\_Offcanvas\OffcanvasSendInvoice.cshtml" />
+      <_ContentIncludedByDefault Remove="wwwroot\vendor\js\_template-customizer\_template-customizer.html" />
+      <_ContentIncludedByDefault Remove="wwwroot\vendor\js\_template-customizer\_template-customizer.scss" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckInput Remove="Pages\Dashboards\Analytics.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Maps\Leaflet.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Access\Permission.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Access\Roles.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Calendar.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Chat.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Email.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Invoice\Add.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Invoice\Edit.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Invoice\List.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Invoice\Preview.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Invoice\Print.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Kanban.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\List.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\View\Account.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\View\Billing.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\View\Connections.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\View\Notifications.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Apps\Users\View\Security.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Cards\Actions.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Cards\Advance.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Cards\Analytics.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Cards\Basic.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Cards\Statistics.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Dashboards\Analytics.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Dashboards\CRM.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Dashboards\Ecommerce.cshtml" />
+      <UpToDateCheckInput Remove="Pages\FormLayouts\Horizontal.cshtml" />
+      <UpToDateCheckInput Remove="Pages\FormLayouts\Sticky.cshtml" />
+      <UpToDateCheckInput Remove="Pages\FormLayouts\Vertical.cshtml" />
+      <UpToDateCheckInput Remove="Pages\FormValidation\Validation.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Icons\FontAwesome.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Icons\Tabler.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\Footer\_Footer.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\Menu\_HorizontalMenu.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\Menu\_VerticalMenu.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\Navbar\_Navbar.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\Navbar\_NavbarPartial.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\_Scripts.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\_ScriptsIncludes.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\_Styles.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\Sections\_Variables.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\_BlankLayout.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\_CommonMasterLayout.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\_ContentNavbarLayout.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Layouts\_HorizontalLayout.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Modals\Examples.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Shared\_ValidationScriptsPartial.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Accordion.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Alerts.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Badges.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Buttons.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Carousel.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Collapse.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Dropdowns.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Footer.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\ListGroups.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Modals.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Navbar.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Offcanvas.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\PaginationBreadcrumbs.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Progress.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Spinners.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\TabsPills.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Toasts.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\TooltipsPopovers.cshtml" />
+      <UpToDateCheckInput Remove="Pages\Ui\Typography.cshtml" />
+    </ItemGroup>
+
+</Project>
