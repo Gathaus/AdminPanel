@@ -17,13 +17,18 @@ public class ApplicationDbContext: DbContext
     }
     
    
+    
+    public DbSet<Article> Articles { get; set; }
+    public DbSet<LogEntity> Logs { get; set; }
+
+
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var now = DateTime.UtcNow;
 
         foreach (var changedEntity in ChangeTracker.Entries())
         {
-            if (changedEntity.Entity is IEntity entity)
+            if (changedEntity.Entity is IHelperModel entity)
             {
                 switch (changedEntity.State)
                 {
@@ -33,13 +38,14 @@ public class ApplicationDbContext: DbContext
                         break;
 
                     case EntityState.Modified:
+                        Entry(entity).Property(x => x.CreatedDate).IsModified = false;
                         entity.UpdatedDate = now;
                         break;
                 }
             }
         }
 
-        return base.SaveChangesAsync();
+        return base.SaveChangesAsync(cancellationToken);
     }
     public override int SaveChanges()
     {
@@ -47,7 +53,7 @@ public class ApplicationDbContext: DbContext
 
         foreach (var changedEntity in ChangeTracker.Entries())
         {
-            if (changedEntity.Entity is IEntity entity)
+            if (changedEntity.Entity is IHelperModel entity)
             {
                 switch (changedEntity.State)
                 {

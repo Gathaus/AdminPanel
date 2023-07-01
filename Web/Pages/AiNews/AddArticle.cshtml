@@ -1,0 +1,151 @@
+@page
+@model Web.Pages.AiNews.AddArticle
+@{
+    ViewData["Title"] = "Vertical Form - Form Layouts";
+}
+
+@section VendorStyles{
+    <link rel="stylesheet" href="~/vendor/libs/flatpickr/flatpickr.dist.css"/>
+    <link rel="stylesheet" href="~/vendor/libs/select2/select2.dist.css"/>
+    <link rel="stylesheet" href="~/vendor/libs/quill/typography.dist.css" xmlns="http://www.w3.org/1999/html"/>
+    <link rel="stylesheet" href="~/vendor/libs/quill/katex.dist.css"/>
+    <link rel="stylesheet" href="~/vendor/libs/quill/editor.dist.css"/>
+}
+
+@section VendorScripts {
+    <script>$(document).ready(function() {
+       // Form submission
+       document.querySelector('#form').addEventListener('submit', function(event) {
+         // Prevent form from submitting normally
+         event.preventDefault();
+       
+         // Create a hidden input element and set its value to the Quill editor's content
+         var hiddenInput = document.createElement('input');
+         hiddenInput.setAttribute('type', 'hidden');
+         hiddenInput.setAttribute('name', 'content');
+         hiddenInput.setAttribute('value', quill.root.innerHTML);
+       
+         // Add the hidden input to the form so its content gets sent with the form
+         this.appendChild(hiddenInput);
+       
+         // Now you can use a normal form submission or an AJAX one
+         this.submit();
+       });
+   });
+</script>
+    <script src="~/vendor/libs/cleavejs/cleave.dist.js"></script>
+    <script src="~/vendor/libs/cleavejs/cleave-phone.dist.js"></script>
+    <script src="~/vendor/libs/moment/moment.dist.js"></script>
+    <script src="~/vendor/libs/flatpickr/flatpickr.dist.js"></script>
+    <script src="~/vendor/libs/select2/select2.dist.js"></script>
+    <script src="~/vendor/libs/quill/katex.dist.js"></script>
+    <script src="~/vendor/libs/quill/quill.dist.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/js/add-article.dist.js"></script>
+}
+
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Vertical Layouts</h4>
+
+<div class="row">
+    <div class="col-xl">
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Basic with Icons</h5>
+            </div>
+            <div class="card-body">
+                <form id="form">
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-fullname">Title</label>
+                        <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-fullname2" class="input-group-text">
+                                <i class="ti ti-user"></i>
+                            </span>
+                            <input type="text" class="form-control" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" aria-describedby="basic-icon-default-fullname2"/>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-message">Description</label>
+                        <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-message2" class="input-group-text">
+                                <i class="ti ti-message-dots"></i>
+                            </span>
+                            <textarea id="basic-icon-default-message" class="form-control" placeholder="Description" aria-describedby="basic-icon-default-message2"></textarea>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="basic-icon-default-email">Tags</label>
+                        <div class="input-group input-group-merge">
+                            <span class="input-group-text">
+                                <i class="ti ti-mail"></i>
+                            </span>
+                            <input type="text" id="basic-icon-default-email" class="form-control" placeholder="john.doe" aria-label="john.doe" aria-describedby="basic-icon-default-email2"/>
+                            <span id="basic-icon-default-email2" class="input-group-text">&#64;example.com</span>
+                        </div>
+                        <div class="form-text"> You can use letters, numbers & periods </div>
+                    </div>
+
+
+                    <div class="mb-3">
+                        <h5 class="card-header">Full Editor</h5>
+                        <div id="full-editor" class="card-body">
+                            <h1>Quill Rich Text Editör: Özellikler ve Kullanım</h1>
+                            <blockquote>
+                                Quill, modern web uygulamaları için güçlü, ücretsiz ve açık kaynaklı bir metin editörüdür.
+                                Quill ile metninizi zenginleştirebilir, görüntüler ekleyebilir ve videolar yerleştirebilir,
+                                linkler oluşturabilir, metninizi farklı başlık seviyeleriyle düzenleyebilir, listeler oluşturabilir ve daha fazlasını yapabilirsiniz.
+                            </blockquote>
+                            <h2>Öne Çıkan Özellikler</h2>
+                            <ul>
+                                <li><strong>Metin Formatlama:</strong> Metni bold, italic veya underline yapabilirsiniz.</li>
+                                <li><strong>Linkler:</strong> Metne <a href="https://quilljs.com/" target="_blank">link</a> ekleyebilirsiniz.</li>
+                                <li><strong>Medya:</strong> Metne görüntüler veya videolar ekleyebilirsiniz.</li>
+                                <li><strong>Listeler:</strong> Sıralı veya sırasız listeler oluşturabilirsiniz.</li>
+                                <li><strong>Başlıklar:</strong> Farklı başlık seviyeleri kullanabilirsiniz.</li>
+                            </ul>
+                            <h2>Kullanım</h2>
+                            <p>
+                                Quill, basit bir API üzerinden zengin bir metin düzenleme deneyimi sağlar. Metni düzenlemek için Quill'in sağladığı araçları kullanabilir,
+                                veya kendi araçlarınızı geliştirebilirsiniz. Quill ayrıca, metnin biçimini korurken metin içeriğini değiştirmenizi sağlar.
+                            </p>
+                            <img src="https://www.tabloshop.com/image/cache/data/urun/ataturk-tablolari/ATA-25__model_3-1000x1000.jpg" alt="Quill kullanım örneği">
+                            <br>
+                            <h2>Öğrenme Kaynakları</h2>
+                            <p>
+                                Quill hakkında daha fazla bilgi edinmek ve kullanmaya başlamak için <a href="https://quilljs.com/" target="_blank">Quill'in web sitesini</a> ziyaret edebilirsiniz.
+                            </p>
+                            <h2>Sonuç</h2>
+                            <p>
+                                Quill, modern web uygulamaları için güçlü, kullanımı kolay ve özelleştirilebilir bir metin düzenleyicisidir.
+                                Özellikle karmaşık metin düzenleme gereksinimleri olan projelerde Quill mükemmel bir seçimdir.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Send</button>
+                    <button id="preview-button" type="button" class="btn btn-secondary" data-toggle="modal" data-target="#previewModal">Preview</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="previewBody">
+                <!-- Quill'den içerik buraya gelecek -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

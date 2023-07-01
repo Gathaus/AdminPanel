@@ -5,114 +5,113 @@
 
 'use strict';
 
-let fv, offCanvasEl;
-document.addEventListener('DOMContentLoaded', function (e) {
-  (function () {
-    const formAddNewRecord = document.getElementById('form-add-new-record');
-
-    // Form validation for Add new record
-    fv = FormValidation.formValidation(formAddNewRecord, {
-      fields: {
-        basicFullname: {
-          validators: {
-            notEmpty: {
-              message: 'The name is required'
-            }
-          }
-        },
-        basicPost: {
-          validators: {
-            notEmpty: {
-              message: 'Post field is required'
-            }
-          }
-        },
-        basicEmail: {
-          validators: {
-            notEmpty: {
-              message: 'The Email is required'
-            },
-            emailAddress: {
-              message: 'The value is not a valid email address'
-            }
-          }
-        },
-        basicDate: {
-          validators: {
-            notEmpty: {
-              message: 'Joining Date is required'
-            },
-            date: {
-              format: 'MM/DD/YYYY',
-              message: 'The value is not a valid date'
-            }
-          }
-        },
-        basicSalary: {
-          validators: {
-            notEmpty: {
-              message: 'Basic Salary is required'
-            }
-          }
-        }
-      },
-      plugins: {
-        trigger: new FormValidation.plugins.Trigger(),
-        bootstrap5: new FormValidation.plugins.Bootstrap5({
-          // Use this for enabling/changing valid/invalid class
-          // eleInvalidClass: '',
-          eleValidClass: '',
-          rowSelector: '.col-sm-12'
-        }),
-        submitButton: new FormValidation.plugins.SubmitButton(),
-        // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
-        autoFocus: new FormValidation.plugins.AutoFocus()
-      },
-      init: instance => {
-        instance.on('plugins.message.placed', function (e) {
-          if (e.element.parentElement.classList.contains('input-group')) {
-            e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
-          }
-        });
-      }
-    });
-
-    // FlatPickr Initialization & Validation
-    flatpickr(formAddNewRecord.querySelector('[name="basicDate"]'), {
-      enableTime: false,
-      // See https://flatpickr.js.org/formatting/
-      dateFormat: 'm/d/Y',
-      // After selecting a date, we need to revalidate the field
-      onChange: function () {
-        fv.revalidateField('basicDate');
-      }
-    });
-  })();
-});
-
-
 // datatable (jquery)
 $(function () {
+  console.log(dataFromRazor)
   var dt_basic_table = $('.datatables-basic'),
       dt_complex_header_table = $('.dt-complex-header'),
       dt_row_grouping_table = $('.dt-row-grouping'),
       dt_multilingual_table = $('.dt-multilingual'),
+      dt_ajax_table = $('.datatables-ajax'),
+      dt_adv_filter_table = $('.dt-advanced-search'),
+      startDateEle = $('.start_date'),
+      endDateEle = $('.end_date'),
       dt_basic;
+
+  // Advanced Search Functions Starts
+  // --------------------------------------------------------------------
+
+  // Datepicker for advanced filter
+  var rangePickr = $('.flatpickr-range'),
+      dateFormat = 'MM/DD/YYYY';
+
+  if (rangePickr.length) {
+    rangePickr.flatpickr({
+      mode: 'range',
+      dateFormat: 'm/d/Y',
+      orientation: isRtl ? 'auto right' : 'auto left',
+      locale: {
+        format: dateFormat
+      },
+      onClose: function (selectedDates, dateStr, instance) {
+        var startDate = '',
+            endDate = new Date();
+        if (selectedDates[0] != undefined) {
+          startDate = moment(selectedDates[0]).format('MM/DD/YYYY');
+          startDateEle.val(startDate);
+        }
+        if (selectedDates[1] != undefined) {
+          endDate = moment(selectedDates[1]).format('MM/DD/YYYY');
+          endDateEle.val(endDate);
+        }
+        $(rangePickr).trigger('change').trigger('keyup');
+      }
+    });
+  }
+
+  // Filter column wise function
+  function filterColumn(i, val) {
+    if (i == 5) {
+      var startDate = startDateEle.val(),
+          endDate = endDateEle.val();
+      if (startDate !== '' && endDate !== '') {
+        $.fn.dataTableExt.afnFiltering.length = 0; // Reset datatable filter
+        dt_basic_table.dataTable().fnDraw(); // Draw table after filter
+        filterByDate(i, startDate, endDate); // We call our filter function
+      }
+      dt_basic_table.dataTable().fnDraw();
+    } else {
+      dt_basic_table.DataTable().column(i).search(val, false, true).draw();
+    }
+  }
+
+  // Advance filter function
+  // We pass the column location, the start date, and the end date
+  $.fn.dataTableExt.afnFiltering.length = 0;
+  var filterByDate = function (column, startDate, endDate) {
+    // Custom filter syntax requires pushing the new filter to the global filter array
+    $.fn.dataTableExt.afnFiltering.push(function (oSettings, aData, iDataIndex) {
+      var rowDate = normalizeDate(aData[column]),
+          start = normalizeDate(startDate),
+          end = normalizeDate(endDate);
+
+      // If our date from the row is between the start and end
+      if (start <= rowDate && rowDate <= end) {
+        return true;
+      } else if (rowDate >= start && end === '' && start !== '') {
+        return true;
+      } else if (rowDate <= end && start === '' && end !== '') {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  };
+
+  // converts date strings to a Date object, then normalized into a YYYYMMMDD format (ex: 20131220). Makes comparing dates easier. ex: 20131220 > 20121220
+  var normalizeDate = function (dateString) {
+    var date = new Date(dateString);
+    var normalized =
+        date.getFullYear() + '' + ('0' + (date.getMonth() + 1)).slice(-2) + '' + ('0' + date.getDate()).slice(-2);
+    return normalized;
+  };
+  // Advanced Search Functions Ends
 
   // DataTable with buttons
   // --------------------------------------------------------------------
 
   if (dt_basic_table.length) {
     dt_basic = dt_basic_table.DataTable({
-      ajax: assetsPath + 'json/table-datatable.json',
+      data:dataFromRazor,
       columns: [
         { data: '' },
         { data: 'id' },
         { data: 'id' },
-        { data: 'full_name' },
-        { data: 'email' },
-        { data: 'start_date' },
-        { data: 'salary' },
+        { data: 'title' },
+        { data: 'description' },
+        { data: 'tags' },
+        { data: 'formattedCreatedDate' },
+        { data: 'formattedUpdatedDate' },
         { data: 'status' },
         { data: '' }
       ],
@@ -147,49 +146,7 @@ $(function () {
           searchable: false,
           visible: false
         },
-        {
-          // Avatar image/badge, Name and post
-          targets: 3,
-          responsivePriority: 4,
-          render: function (data, type, full, meta) {
-            var $user_img = full['avatar'],
-                $name = full['full_name'],
-                $post = full['post'];
-            if ($user_img) {
-              // For Avatar image
-              var $output =
-                  '<img src="' + assetsPath + 'img/avatars/' + $user_img + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                  $name = full['full_name'],
-                  $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for row
-            var $row_output =
-                '<div class="d-flex justify-content-start align-items-center user-name">' +
-                '<div class="avatar-wrapper">' +
-                '<div class="avatar me-2">' +
-                $output +
-                '</div>' +
-                '</div>' +
-                '<div class="d-flex flex-column">' +
-                '<span class="emp_name text-truncate">' +
-                $name +
-                '</span>' +
-                '<small class="emp_post text-truncate text-muted">' +
-                $post +
-                '</small>' +
-                '</div>' +
-                '</div>';
-            return $row_output;
-          }
-        },
-        {
+  {
           responsivePriority: 1,
           targets: 4
         },
@@ -199,11 +156,9 @@ $(function () {
           render: function (data, type, full, meta) {
             var $status_number = full['status'];
             var $status = {
-              1: { title: 'Current', class: 'bg-label-primary' },
-              2: { title: 'Professional', class: ' bg-label-success' },
-              3: { title: 'Rejected', class: ' bg-label-danger' },
-              4: { title: 'Resigned', class: ' bg-label-warning' },
-              5: { title: 'Applied', class: ' bg-label-info' }
+              0: { title: 'Draft', class: 'bg-label-primary' },
+              1: { title: 'Published', class: ' bg-label-success' },
+              2: { title: 'Deleted', class: ' bg-label-danger' },
             };
             if (typeof $status[$status_number] === 'undefined') {
               return data;
@@ -382,21 +337,45 @@ $(function () {
         },
         {
           text: '<i class="ti ti-plus me-sm-1"></i> <span class="d-none d-sm-inline-block">Add New Record</span>',
-          className: 'create-new btn btn-primary',
+          className: 'create-new btn btn-primary mr-2',
           action: function(e, dt, button, config) {
-            const offCanvasElement = document.querySelector('#add-new-record');
+            window.location.href = '/AiNews/AddArticle'
+          }
+        },
+        {
+          text: '<i class="ti ti-trash me-sm-1"></i> <span class="d-none d-sm-inline-block">Delete Selected</span>',
+          className: 'delete-selected btn btn-danger disabled',
+          action: function (e, dt, button, config) {
+            const selectedIds = $('.dt-checkboxes:checkbox:checked').map(function () {
+              return dt.row($(this).closest('tr')).data().id;
+            }).get();
+            if (selectedIds.length === 0) {
+              // Show an alert if no rows are selected
+              alert('No rows selected!');
+              return;
+            }
+            console.log(selectedIds)
 
-            offCanvasEl = new bootstrap.Offcanvas(offCanvasElement);
-
-            // Empty fields on offCanvas open
-            (offCanvasElement.querySelector('.dt-full-name').value = ''),
-                (offCanvasElement.querySelector('.dt-post').value = ''),
-                (offCanvasElement.querySelector('.dt-email').value = ''),
-                (offCanvasElement.querySelector('.dt-date').value = ''),
-                (offCanvasElement.querySelector('.dt-salary').value = '');
-
-            // Open offCanvas with form
-            offCanvasEl.show();
+            // Here, you can make a POST request to your server to delete the selected rows.
+            // Replace the URL '/api/AiNews/DeleteArticles' with your API endpoint.
+            // fetch('/api/AiNews/DeleteArticles', {
+            //   method: 'POST',
+            //   headers: {
+            //     'Content-Type': 'application/json'
+            //   },
+            //   body: JSON.stringify(selectedIds)
+            // }).then(response => {
+            //   if (!response.ok) {
+            //     throw new Error('Network response was not ok');
+            //   }
+            //   return response.text();
+            // }).then(data => {
+            //   console.log('Success:', data);
+            //   // Reload the DataTable to show updated data
+            //   dt_basic.ajax.reload();
+            // }).catch((error) => {
+            //   console.error('Error:', error);
+            // });
           }
         }
       ],
@@ -405,7 +384,7 @@ $(function () {
           display: $.fn.dataTable.Responsive.display.modal({
             header: function (row) {
               var data = row.data();
-              return 'Details of ' + data['full_name'];
+              return 'Details of ' + data['title'];
             }
           }),
           type: 'column',
@@ -436,41 +415,21 @@ $(function () {
     $('div.head-label').html('<h5 class="card-title mb-0">DataTable with Buttons</h5>');
   }
 
-  // Add New record
-  // ? Remove/Update this code as per your requirements
-  var count = 101;
-  // On form submit, if form is valid
-  fv.on('core.form.valid', function () {
-    var $new_name = $('.add-new-record .dt-full-name').val(),
-        $new_post = $('.add-new-record .dt-post').val(),
-        $new_email = $('.add-new-record .dt-email').val(),
-        $new_date = $('.add-new-record .dt-date').val(),
-        $new_salary = $('.add-new-record .dt-salary').val();
-
-    if ($new_name != '') {
-      dt_basic.row
-          .add({
-            id: count,
-            full_name: $new_name,
-            post: $new_post,
-            email: $new_email,
-            start_date: $new_date,
-            salary: '$' + $new_salary,
-            status: 5
-          })
-          .draw();
-      
-      //SUBMIT PART
-      count++;
-
-      // Hide offcanvas using javascript method
-      offCanvasEl.hide();
-    }
-  });
-
   // Delete Record
   $('.datatables-basic tbody').on('click', '.delete-record', function () {
     dt_basic.row($(this).parents('tr')).remove().draw();
+  });
+  
+  dt_basic.on('click', 'a.item-edit', function() {
+      var tr = $(this).closest('tr');
+      var row = dt_basic.row(tr);
+      var rowData = row.data();
+      window = window.location.href = '/AiNews/EditArticle?id=' + rowData.id;
+    });
+  
+  // on key up from input field
+  $('input.dt-input').on('keyup', function () {
+    filterColumn($(this).attr('data-column'), $(this).val());
   });
 
 

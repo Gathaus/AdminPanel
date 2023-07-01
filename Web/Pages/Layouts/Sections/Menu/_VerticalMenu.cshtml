@@ -32,6 +32,38 @@
         <div data-i18n="Home">Home</div>
       </a>
     </li>
+    <li class='menu-item@(currentPage.StartsWith("/Analyze/") ? " active open" : "")'>
+      <a href="javascript:void(0)" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons ti ti-color-swatch"></i>
+        <div data-i18n="Analyze">Analyze</div>
+      </a>
+      <ul class="menu-sub">
+        <li class='menu-item@(currentPage == "/Ui/Accordion" ? " active" : "")'>
+          <a asp-page="/Ui/Accordion" class="menu-link">
+            <div data-i18n="AiNews">AiNews</div>
+          </a>
+        </li>
+        <li class='menu-item@(currentPage == "/Ui/Alerts" ? " active" : "")'>
+          <a asp-page="/Ui/Alerts" class="menu-link">
+            <div data-i18n="LezzetRotasi">LezzetRotasi</div>
+          </a>
+        </li>
+            
+      </ul>
+    </li>
+    <li class=' menu-item@(currentPage=="/Users" ? " active" : "" )'>
+      <a asp-page="/Users" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-smart-home"></i>
+        <div data-i18n="Users">Users</div>
+      </a>
+    </li>
+    
+           <li class=' menu-item@(currentPage=="/Automations" ? " active" : "" )'>
+              <a asp-page="/Automations" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-settings-automation"></i>
+                <div data-i18n="Automations">Automations</div>
+              </a>
+            </li>
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">AI News</span>
     </li>

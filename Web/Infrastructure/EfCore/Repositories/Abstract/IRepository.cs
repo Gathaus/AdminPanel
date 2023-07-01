@@ -4,11 +4,11 @@ namespace Web.Infrastructure.EfCore.Repositories.Abstract;
 
 public interface IRepository<TEntity> where TEntity : IEntity
 {
-    Task InsertRangeAsync(IEnumerable<TEntity> entities);
+    Task AddRangeAsync(IEnumerable<TEntity> entities);
 
-    Task<TEntity> InsertAsync(TEntity entity);
+    Task<TEntity> AddAsync(TEntity entity);
 
-    TEntity Insert(TEntity entity);
+    TEntity Add(TEntity entity);
 
     void Update(TEntity entity);
 
@@ -21,7 +21,7 @@ public interface IRepository<TEntity> where TEntity : IEntity
         params string[] includeParams);
 
     IQueryable<TEntity> FindBy(params string[] includeParams);
-
+    IQueryable<TEntity> Query();
     IQueryable<TEntity> FindBy(
         Expression<Func<TEntity, bool>> expression,
         params string[] includeParams);

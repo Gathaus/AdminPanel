@@ -21,8 +21,8 @@
     ViewData["menuCollapsed"] = (ViewData["menuCollapsed"] ?? "layout-menu-collapsed"); *@
 
   @*Content classes *@
-  ViewData["container"] = (ViewData["container"] ?? "container-xxl");
-  ViewData["containerNav"] = (ViewData["containerNav"] ?? "container-xxl");
+  ViewData["container"] = (ViewData["container"] ?? "container-fluid");
+  ViewData["containerNav"] = (ViewData["containerNav"] ?? "container-fluid");
 }
 
 @section VendorStyles{ @RenderSection("VendorStyles", required: false) }

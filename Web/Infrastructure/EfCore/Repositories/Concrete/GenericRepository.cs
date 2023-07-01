@@ -18,18 +18,18 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
             _entitySet = _context.Set<TEntity>();
         }
 
-        public async Task InsertRangeAsync(IEnumerable<TEntity> entities)
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _entitySet.AddRangeAsync(entities);
         }
 
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public async Task<TEntity> AddAsync(TEntity entity)
         {
             await _entitySet.AddAsync(entity);
             return entity;
         }
 
-        public TEntity Insert(TEntity entity)
+        public TEntity Add(TEntity entity)
         {
             _entitySet.Add(entity);
             return entity;
@@ -58,6 +58,11 @@ public class GenericRepository<TEntity> : IRepository<TEntity> where TEntity : c
         public IQueryable<TEntity> FindBy(params string[] includeParams)
         {
             return _baseQuery(includeParams);
+        }
+
+        public IQueryable<TEntity> Query()
+        {
+            return _entitySet;
         }
 
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> expression, params string[] includeParams)
