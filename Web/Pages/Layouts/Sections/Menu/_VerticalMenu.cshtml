@@ -32,21 +32,21 @@
         <div data-i18n="Home">Home</div>
       </a>
     </li>
-    <li class='menu-item@(currentPage == "/Page2" ? " active" : "")'>
-      <a asp-page="/Page2" class="menu-link">
-        <i class="menu-icon tf-icons ti ti-app-window"></i>
-        <div data-i18n="Page2">Page2</div>
-      </a>
-    </li>
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">AI News</span>
     </li>
     <li class='menu-item@(currentPage == "/AiNews/Articles" ? " active" : "")'>
-          <a asp-page="/AiNews/Articles" class="menu-link">
-            <i class="menu-icon tf-icons ti ti-app-window"></i>
-            <div data-i18n="Articles">Articles</div>
-          </a>
-        </li>
+      <a asp-page="/AiNews/Articles" class="menu-link">
+        <i class="menu-icon tf-icons ti ti-app-window"></i>
+        <div data-i18n="Articles">Articles</div>
+      </a>
+    </li>
+    <li class='menu-item@(currentPage == "/AiNews/Editor" ? " active" : "")'>
+              <a asp-page="/AiNews/Editor" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-app-window"></i>
+                <div data-i18n="Editor">Editor</div>
+              </a>
+            </li>
   </ul>
 
 </aside>

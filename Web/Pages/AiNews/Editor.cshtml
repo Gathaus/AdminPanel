@@ -1,0 +1,94 @@
+@page
+@model Web.Pages.AiNews.Editor
+@{
+    ViewData["Title"] = "Editors - Forms";
+}
+
+@section VendorStyles {
+
+
+    <link rel="stylesheet" href="~/vendor/libs/quill/typography.dist.css" xmlns="http://www.w3.org/1999/html"/>
+    <link rel="stylesheet" href="~/vendor/libs/quill/katex.dist.css"/>
+    <link rel="stylesheet" href="~/vendor/libs/quill/editor.dist.css"/>
+
+
+}
+
+
+@section VendorScripts {
+    <script src="~/vendor/libs/quill/katex.dist.js"></script>
+    <script src="~/vendor/libs/quill/quill.dist.js"></script>
+}
+
+@section PageScripts {
+    <script src="~/js/forms-editors.dist.js"></script>
+}
+
+@* ************** Content ************** *@
+
+<h4 class="fw-bold py-3 mb-4">
+    <span class="text-muted fw-light">Forms /</span> Editors
+</h4>
+<div class="row">
+    <!-- Full Editor -->
+    <div class="col-12">
+        <div class="card">
+            <h5 class="card-header">Full Editor</h5>
+            <div class="card-body">
+                <div id="full-editor">
+                    <h1>Quill Rich Text Editör: Özellikler ve Kullanım</h1>
+                    <blockquote>
+                        Quill, modern web uygulamaları için güçlü, ücretsiz ve açık kaynaklı bir metin editörüdür.
+                        Quill ile metninizi zenginleştirebilir, görüntüler ekleyebilir ve videolar yerleştirebilir,
+                        linkler oluşturabilir, metninizi farklı başlık seviyeleriyle düzenleyebilir, listeler oluşturabilir ve daha fazlasını yapabilirsiniz.
+                    </blockquote>
+                    <h2>Öne Çıkan Özellikler</h2>
+                    <ul>
+                        <li><strong>Metin Formatlama:</strong> Metni bold, italic veya underline yapabilirsiniz.</li>
+                        <li><strong>Linkler:</strong> Metne <a href="https://quilljs.com/" target="_blank">link</a> ekleyebilirsiniz.</li>
+                        <li><strong>Medya:</strong> Metne görüntüler veya videolar ekleyebilirsiniz.</li>
+                        <li><strong>Listeler:</strong> Sıralı veya sırasız listeler oluşturabilirsiniz.</li>
+                        <li><strong>Başlıklar:</strong> Farklı başlık seviyeleri kullanabilirsiniz.</li>
+                    </ul>
+                    <h2>Kullanım</h2>
+                    <p>
+                        Quill, basit bir API üzerinden zengin bir metin düzenleme deneyimi sağlar. Metni düzenlemek için Quill'in sağladığı araçları kullanabilir,
+                        veya kendi araçlarınızı geliştirebilirsiniz. Quill ayrıca, metnin biçimini korurken metin içeriğini değiştirmenizi sağlar.
+                    </p>
+                    <img src="https://www.tabloshop.com/image/cache/data/urun/ataturk-tablolari/ATA-25__model_3-1000x1000.jpg" alt="Quill kullanım örneği">
+                    <br>
+                    <h2>Öğrenme Kaynakları</h2>
+                    <p>
+                        Quill hakkında daha fazla bilgi edinmek ve kullanmaya başlamak için <a href="https://quilljs.com/" target="_blank">Quill'in web sitesini</a> ziyaret edebilirsiniz.
+                    </p>
+                    <h2>Sonuç</h2>
+                    <p>
+                        Quill, modern web uygulamaları için güçlü, kullanımı kolay ve özelleştirilebilir bir metin düzenleyicisidir.
+                        Özellikle karmaşık metin düzenleme gereksinimleri olan projelerde Quill mükemmel bir seçimdir.
+                    </p>
+                </div>
+                <button id="submit-button" class="btn btn-primary mt-3">Submit</button> <!-- Submit butonu -->
+                <button id="preview-button" class="btn btn-secondary mt-3" data-toggle="modal" data-target="#previewModal">Preview</button>
+
+            </div>
+        </div>
+    </div>
+    <!-- /Full Editor -->
+</div>
+<!-- Preview Modal -->
+<div class="modal fade" id="previewModal" tabindex="-1" role="dialog" aria-labelledby="previewModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="previewModalLabel">Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="previewBody">
+                <!-- Quill'den içerik buraya gelecek -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

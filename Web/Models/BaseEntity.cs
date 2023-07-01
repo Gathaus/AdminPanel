@@ -1,6 +1,6 @@
 using Web.Infrastructure.EfCore.Repositories.Abstract;
 
-namespace Web.Infrastructure.EfCore.Repositories.Concrete;
+namespace Web.Models;
 
 public class BaseEntity :IEntity
 {
